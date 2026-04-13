@@ -48,6 +48,183 @@ body.light {
 }
 
 /* ============================================
+   QURAN VERSE SECTION
+   ============================================ */
+.quran-section {
+  background: linear-gradient(160deg, #0a0a12 0%, #0d0d1a 50%, #0a0a12 100%);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  padding: 52px 24px 44px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.quran-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 20% 50%, rgba(212,175,55,.06) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 80% 50%, rgba(124,106,247,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+body.light .quran-section {
+  background: linear-gradient(160deg, #fdf8e8 0%, #fef9ed 50%, #fdf8e8 100%);
+  border-bottom: 1px solid rgba(180, 140, 20, 0.25);
+}
+body.light .quran-section::before {
+  background:
+    radial-gradient(ellipse 60% 60% at 20% 50%, rgba(212,175,55,.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 80% 50%, rgba(124,106,247,.05) 0%, transparent 70%);
+}
+
+.quran-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.quran-ornament {
+  font-size: 1rem;
+  color: rgba(212, 175, 55, 0.6);
+  letter-spacing: 0.12em;
+  font-family: 'Amiri', serif;
+}
+
+/* Verse card — unified single block */
+.quran-verse-box {
+  width: 100%;
+  background: rgba(212, 175, 55, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 16px;
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+body.light .quran-verse-box {
+  background: rgba(212, 175, 55, 0.07);
+  border-color: rgba(160, 120, 10, 0.2);
+}
+
+.quran-arabic {
+  font-family: 'Amiri', 'Scheherazade New', serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  line-height: 2;
+  color: #d4af37;
+  direction: rtl;
+  letter-spacing: 0.03em;
+  margin: 0 0 16px;
+  width: 100%;
+  text-align: center;
+}
+body.light .quran-arabic { color: #a07c10; }
+
+.quran-divider {
+  width: 48px;
+  height: 1px;
+  background: rgba(212, 175, 55, 0.3);
+  margin: 0 auto 16px;
+}
+body.light .quran-divider { background: rgba(160, 120, 10, 0.25); }
+
+.quran-translation {
+  font-size: clamp(0.92rem, 2vw, 1.05rem);
+  color: rgba(220, 220, 240, 0.82);
+  font-style: italic;
+  max-width: 100%;
+  line-height: 1.75;
+  margin: 0 0 14px;
+  text-align: center;
+}
+body.light .quran-translation { color: rgba(40, 36, 20, 0.78); }
+
+.quran-ref {
+  font-family: var(--font-code);
+  font-size: 0.72rem;
+  color: rgba(212, 175, 55, 0.55);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+}
+body.light .quran-ref { color: rgba(140, 100, 10, 0.6); }
+
+@media (max-width: 640px) {
+  .quran-section { padding: 36px 16px 28px; }
+  .quran-verse-box { padding: 24px 20px; }
+}
+
+/* ============================================
+   DEV BANNER
+   ============================================ */
+.dev-banner {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #1a1200,
+    #1a1200 10px,
+    #221900 10px,
+    #221900 20px
+  );
+  border-bottom: 2px solid #f59e0b;
+  font-size: 0.85rem;
+  color: #fde68a;
+  flex-wrap: wrap;
+  text-align: center;
+  transition: max-height 0.35s ease, padding 0.35s ease, border-width 0.35s ease, opacity 0.35s ease;
+  overflow: hidden;
+}
+body.light .dev-banner {
+  background: repeating-linear-gradient(
+    -45deg,
+    #fef9c3,
+    #fef9c3 10px,
+    #fef3a0 10px,
+    #fef3a0 20px
+  );
+  border-bottom-color: #d97706;
+  color: #78350f;
+}
+.dev-banner.hidden {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-width: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.dev-banner-icon { font-size: 1rem; flex-shrink: 0; }
+.dev-banner strong { color: #fbbf24; }
+body.light .dev-banner strong { color: #b45309; }
+.dev-banner-close {
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  color: #fde68a;
+  font-size: 0.7rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition);
+  cursor: pointer;
+  border: none;
+}
+body.light .dev-banner-close { background: rgba(0,0,0,0.08); color: #78350f; }
+.dev-banner-close:hover { background: rgba(255,255,255,0.25); }
+
+/* ============================================
    RESET & BASE
    ============================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -134,6 +311,7 @@ h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
 }
 
 .btn-full { width: 100%; justify-content: center; }
+.btn-send { align-self: flex-start; }
 .btn-sm { padding: 8px 20px; font-size: 0.85rem; }
 
 /* ============================================
@@ -290,6 +468,7 @@ body.light .navbar.scrolled {
   min-height: 100dvh;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   overflow: hidden;
   padding-top: var(--nav-height);
@@ -337,8 +516,7 @@ body.light .blob { opacity: 0.12; }
 }
 
 /* Hero grid layout */
-.hero > .hero-content,
-.hero > .hero-visual {
+.hero > .hero-content {
   position: relative;
   z-index: 1;
 }
@@ -348,17 +526,17 @@ body.light .blob { opacity: 0.12; }
   max-width: var(--container);
   margin-inline: auto;
   padding-inline: 24px;
-  padding-top: 40px;
-  padding-bottom: 100px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: auto;
-  column-gap: 60px;
+  padding-block: 60px 100px;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 60px;
 }
 
-.hero-content > * { grid-column: 1; }
-.hero-visual      { grid-column: 2; grid-row: 1 / 8; align-self: center; }
+.hero-text {
+  flex: 1;
+  min-width: 0;
+}
 
 .hero-greeting {
   font-family: var(--font-code);
@@ -1067,10 +1245,11 @@ body.light .blob { opacity: 0.12; }
   .project-card.featured { grid-column: span 2; }
 
   .hero-content {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     text-align: center;
+    padding-block: 40px 80px;
+    gap: 40px;
   }
-  .hero-content > * { grid-column: 1; }
   .hero-visual { display: none; }
   .hero-description { max-width: 100%; }
   .hero-cta, .hero-socials { justify-content: center; }

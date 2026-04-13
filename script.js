@@ -5,6 +5,20 @@
 (function () {
   'use strict';
 
+  /* ── Dev banner dismiss ── */
+  const devBanner      = document.getElementById('devBanner');
+  const devBannerClose = document.getElementById('devBannerClose');
+  if (devBannerClose) {
+    // Restore dismissed state across reloads
+    if (sessionStorage.getItem('devBannerDismissed')) {
+      devBanner.classList.add('hidden');
+    }
+    devBannerClose.addEventListener('click', () => {
+      devBanner.classList.add('hidden');
+      sessionStorage.setItem('devBannerDismissed', '1');
+    });
+  }
+
   /* ── Theme toggle ── */
   const themeToggle = document.getElementById('themeToggle');
   const themeIcon   = themeToggle.querySelector('.theme-icon');
@@ -70,7 +84,8 @@
     'Principal Software Engineer',
     'Software Architect',
     'Engineering Leader',
-    'Full-Stack Developer',
+    'Backend Engineer',
+    'API & Systems Designer',
     'Cloud & DevOps Enthusiast',
   ];
   const typedEl = document.getElementById('typedText');
@@ -151,7 +166,7 @@
     lastName  : (v) => v.trim().length >= 2 || 'Last name is required.',
     email     : (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || 'Please enter a valid email.',
     subject   : (v) => v.trim().length >= 3 || 'Subject is too short.',
-    message   : (v) => v.trim().length >= 20 || 'Message must be at least 20 characters.',
+    message   : (v) => v.trim().length >= 5 || 'Please enter a message.',
   };
 
   function validateField(name, value) {
@@ -188,7 +203,7 @@
     }
 
     // Swap to a real Formspree endpoint: action="https://formspree.io/f/YOUR_ID"
-    const endpoint = form.action && form.action !== window.location.href
+    const endpoint = form.action && form.action.includes('formspree.io')
       ? form.action
       : null;
 
